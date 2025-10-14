@@ -6,13 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const triggerBottom = window.innerHeight * 0.8;
     fadeSections.forEach(sec => {
       const sectionTop = sec.getBoundingClientRect().top;
-      if (sectionTop < triggerBottom) {
-        sec.classList.add("fade-in");
-      }
+      if (sectionTop < triggerBottom) sec.classList.add("fade-in");
     });
   };
 
   window.addEventListener("scroll", revealOnScroll);
-  revealOnScroll(); // trigger pertama
+  revealOnScroll();
 });
+
 
