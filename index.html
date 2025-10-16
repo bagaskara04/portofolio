@@ -10,149 +10,342 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top left, #0d1117, #171b34, #10172a);
+      color: #e5e7eb;
+      overflow-x: hidden;
+    }
+
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Navbar */
+    nav {
+      background: rgba(13, 17, 23, 0.3);
+      backdrop-filter: blur(10px);
+      transition: background 0.5s ease, box-shadow 0.5s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(13, 17, 23, 0.85);
+      box-shadow: 0 0 15px rgba(88, 166, 255, 0.2);
+    }
+
+    .nav-link {
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link.active {
+      color: #58a6ff;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: #58a6ff;
+      transition: width 0.3s ease;
+    }
+
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* Fade Sections */
+    .fade-section {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease-out;
+    }
+
+    .fade-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Gradient Text */
+    .text-gradient {
+      background: linear-gradient(90deg, #58a6ff, #a855f7, #f472b6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% auto;
+      animation: gradientMove 4s linear infinite;
+    }
+
+    @keyframes gradientMove {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      100% {
+        background-position: 200% 50%;
+      }
+    }
+
+    /* Glow */
+    .glow {
+      box-shadow: 0 0 15px rgba(88, 166, 255, 0.4), 0 0 30px rgba(168, 85, 247, 0.3);
+      transition: all 0.3s ease-in-out;
+    }
+
+    .glow:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(88, 166, 255, 0.6), 0 0 60px rgba(168, 85, 247, 0.5);
+    }
+  </style>
 </head>
 
-<body>
-  <!-- === NAVIGATION === -->
-  <nav>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#experience">Experience</a>
-    <a href="#education">Education</a>
-    <a href="#contact">Contact</a>
+<body class="relative text-gray-200 selection:bg-purple-500/30">
+
+  <!-- 3D Background -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- NAVBAR -->
+  <nav id="navbar" class="fixed top-0 left-0 w-full border-b border-[#232946] z-50">
+    <div class="max-w-5xl mx-auto flex justify-center items-center py-3 px-6">
+      <div class="flex flex-wrap justify-center gap-6 text-sm font-medium">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#techstack" class="nav-link">Tech Stack</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#education" class="nav-link">Education</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+    </div>
   </nav>
 
-  <!-- === HEADER === -->
-  <header>
-    <h1>Fachry Akbar Bagaskara</h1>
-    <p>Web Developer | Tech Explorer | UI/UX Enthusiast</p>
+  <!-- HEADER -->
+  <header class="h-screen flex flex-col justify-center items-center text-center fade-section">
+    <h1 class="text-5xl sm:text-6xl font-extrabold mb-4 text-gradient">Fachry Akbar Bagaskara</h1>
+    <p class="text-lg text-gray-400 mb-6">Undergraduate Business Information System at Politeknik Negeri Malang | Software Development | SEO Learner | Tech Enthusiast</p>
+    <a href="#about"
+      class="mt-3 px-6 py-3 bg-gradient-to-r from-[#58a6ff] to-[#a855f7] text-white rounded-lg font-medium shadow-md hover:scale-105 transition">Explore
+      More ↓</a>
   </header>
 
-  <!-- === ABOUT === -->
-  <section id="about" class="fade-section">
-    <h2>About Me</h2>
-    <p>
-      Halo! Saya adalah seorang pengembang web dengan semangat tinggi dalam membuat website yang modern, responsif, dan
-      menarik. Saya memiliki ketertarikan besar dalam dunia teknologi terkini, terutama dalam pengembangan web dan
-      desain antarmuka.
-    </p>
+  <!-- ABOUT -->
+  <section id="about" class="py-24 px-6 md:px-24 fade-section">
+    <h2 class="text-3xl font-semibold text-gradient mb-6">About Me</h2>
+    <p class="max-w-3xl text-gray-300">Halo! Saya pengembang web yang fokus pada desain modern, performa cepat, dan
+      pengalaman pengguna menyenangkan. Saya menyukai kombinasi antara <span
+        class="text-[#58a6ff] font-semibold">teknologi
+        & kreativitas</span> untuk menciptakan website interaktif dan bermakna.</p>
   </section>
 
-  <!-- === SKILLS === -->
-  <section id="skills" class="fade-section">
-    <h2>Skills</h2>
-    <div class="skills">
-      <div class="skill-card"><i class='bx bxl-html5'></i>
-        <p>HTML & CSS</p>
+  <!-- TECH STACK -->
+  <section id="techstack" class="py-24 px-6 md:px-24 fade-section">
+    <h2 class="text-3xl font-semibold text-gradient mb-8">Tech Stacks</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 text-center">
+      <div class="glow bg-[#161b22]/80 p-6 rounded-xl"><i class='bx bxl-html5 text-4xl text-[#f97316]'></i>
+        <p>HTML</p>
       </div>
-      <div class="skill-card">
-        <i class='bx bxl-java'></i>
+      <div class="glow bg-[#161b22]/80 p-6 rounded-xl"><i class='bx bxl-css3 text-4xl text-[#3b82f6]'></i>
+        <p>CSS</p>
+      </div>
+      <div class="glow bg-[#161b22]/80 p-6 rounded-xl"><i class='bx bxl-java text-4xl text-[#a855f7]'></i>
         <p>Java</p>
       </div>
-      <div class="skill-card"><i class='bx bxl-javascript'></i>
+      <div class="glow bg-[#161b22]/80 p-6 rounded-xl"><i class='bx bxl-javascript text-4xl text-[#facc15]'></i>
         <p>JavaScript</p>
       </div>
-      <div class="skill-card"><i class='bx bxl-php'></i>
+      <div class="glow bg-[#161b22]/80 p-6 rounded-xl"><i class='bx bxl-php text-4xl text-[#ec4899]'></i>
         <p>PHP & Laravel</p>
       </div>
-      <div class="skill-card"><i class='bx bxl-git'></i>
+      <div class="glow bg-[#161b22]/80 p-6 rounded-xl"><i class='bx bxl-flutter text-4xl text-[#38bdf8]'></i>
+        <p>Flutter</p>
+      </div>
+      <div class="glow bg-[#161b22]/80 p-6 rounded-xl"><i class='bx bx-data text-4xl text-[#0ea5e9]'></i>
+        <p>MySQL</p>
+      </div>
+      <div class="glow bg-[#161b22]/80 p-6 rounded-xl"><i class='bx bxl-git text-4xl text-[#f97316]'></i>
         <p>Git & GitHub</p>
       </div>
-      <div class="skill-card"><i class='bx bxs-data'></i>
-        <p>SQL & Database</p>
-      </div>
     </div>
   </section>
 
-  <!-- === PROJECTS === -->
-  <section id="projects" class="fade-section">
-    <h2>Projects</h2>
-    <div class="projects">
-      <a href="https://github.com/bagaskara04/Kasir-Restoran" class="project" target="_blank">
-        <i class="bx bx-store-alt project-icon"></i>
-        <h3>Kasir Restoran</h3>
-        <p>Aplikasi kasir desktop berbasis Java dengan fitur transaksi, laporan, dan manajemen menu.</p>
+  <!-- PROJECTS -->
+  <section id="projects" class="py-24 px-6 md:px-24 fade-section bg-[#0d1117]/60">
+    <h2 class="text-3xl font-semibold text-gradient mb-8">Projects</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <a href="https://github.com/bagaskara04/Kasir-Restoran" target="_blank"
+        class="glow bg-[#161b22]/90 p-8 rounded-2xl text-center hover:-translate-y-2 transition">
+        <i class="bx bx-store-alt text-5xl text-[#58a6ff] mb-3"></i>
+        <h3 class="text-xl font-bold mb-2">Kasir Restoran</h3>
+        <p class="text-gray-400 text-sm">Aplikasi kasir berbasis Java Netbeans(GUI) dengan fitur transaksi, laporan, dan
+          manajemen
+          menu.</p>
       </a>
-
-      <a href="https://github.com/bagaskara04/TataTertib" class="project" target="_blank">
-        <i class="bx bx-task project-icon"></i>
-        <h3>SITATIB</h3>
-        <p>Website pencatatan pelanggaran mahasiswa Polinema untuk membantu pengelolaan data pelanggaran secara efisien.
-        </p>
+      <a href="https://github.com/bagaskara04/TataTertib" target="_blank"
+        class="glow bg-[#161b22]/90 p-8 rounded-2xl text-center hover:-translate-y-2 transition">
+        <i class="bx bx-task text-5xl text-[#a855f7] mb-3"></i>
+        <h3 class="text-xl font-bold mb-2">SITATIB</h3>
+        <p class="text-gray-400 text-sm">Website pencatatan pelanggaran mahasiswa Polinema berbasis Laravel.</p>
       </a>
-
-      <a href="https://github.com/jessicaamelia17/PBL-TOEIC" class="project" target="_blank">
-        <i class="bx bxs-graduation project-icon"></i>
-        <h3>PTC (Polinema TOEIC Center)</h3>
-        <p>Sistem pendaftaran dan pengelolaan ujian TOEIC Polinema berbasis Laravel.</p>
+      <a href="https://github.com/jessicaamelia17/PBL-TOEIC" target="_blank"
+        class="glow bg-[#161b22]/90 p-8 rounded-2xl text-center hover:-translate-y-2 transition">
+        <i class="bx bxs-graduation text-5xl text-[#ec4899] mb-3"></i>
+        <h3 class="text-xl font-bold mb-2">PTC (Polinema TOEIC Center)</h3>
+        <p class="text-gray-400 text-sm">Sistem pendaftaran & pengelolaan ujian TOEIC berbasis Laravel.</p>
       </a>
     </div>
   </section>
 
-  <!-- === EXPERIENCE === -->
-  <section id="experience" class="fade-section">
-    <h2>Experience</h2>
-
-    <div class="timeline">
-
-      <div class="timeline-item">
-        <h3>SEO Off-Page - PT. Visi Energi Abadi</h3>
-        <span class="timeline-date">Februari 2022 - Desember 2022</span>
-        <ul>
+  <!-- EXPERIENCE -->
+  <section id="experience" class="py-24 px-6 md:px-24 fade-section">
+    <h2 class="text-3xl font-semibold text-gradient mb-8">Experience</h2>
+    <div class="border-l-2 border-[#58a6ff] pl-6 space-y-8">
+      <div>
+        <h3 class="text-[#58a6ff] text-lg font-semibold">SEO Off-Page - PT. Visi Energi Abadi (Intern)</h3>
+        <span class="text-sm text-gray-400">Februari 2022 - Desember 2022</span>
+        <ul class="list-disc ml-5 mt-2 text-gray-300 text-sm">
           <li>Mengoptimalkan konten website untuk SEO organik.</li>
           <li>Membangun backlink guna meningkatkan peringkat pencarian.</li>
         </ul>
       </div>
-
-      <div class="timeline-item">
-        <h3>Staff Kementerian SDM & Religi - BEM Polinema</h3>
-        <span class="timeline-date">April 2024 - Januari 2025</span>
-        <p>
-          <strong>Koordinator Sie Perlengkapan:</strong>
-          Mengkoordinir anggota dalam menyiapkan perlengkapan kegiatan kampus.
-        </p>
+      <div>
+        <h3 class="text-[#a855f7] text-lg font-semibold">Staff Kementerian SDM & Religi - BEM Polinema</h3>
+        <span class="text-sm text-gray-400">April 2024 - Januari 2025</span>
+        <p class="mt-2 text-gray-300 text-sm"><strong>Koordinator Sie Perlengkapan:</strong> Mengkoordinir anggota dalam
+          menyiapkan perlengkapan kegiatan kampus.</p>
       </div>
-
     </div>
   </section>
 
-
-  <!-- === EDUCATION === -->
-  <section id="education" class="fade-section">
-    <h2>Education</h2>
-    <div class="edu-item">
-      <h3>Politeknik Negeri Malang</h3>
-      <span>Diploma IV - Sistem Informasi Bisnis | 2023 - Sekarang</span>
-      <h3>SMKN 04 Malang</h3>
-      <span>Rekayasa Perangkat Lunak | 2020 - 2023</span>
+  <!-- EDUCATION -->
+  <section id="education" class="py-24 px-6 md:px-24 fade-section bg-[#0d1117]/70">
+    <h2 class="text-3xl font-semibold text-gradient mb-8">Education</h2>
+    <div class="space-y-3">
+      <div>
+        <h3 class="text-[#58a6ff] font-semibold">Politeknik Negeri Malang</h3>
+        <p class="text-gray-400 text-sm">Diploma IV - Sistem Informasi Bisnis | 2023 - Sekarang</p>
+      </div>
+      <div>
+        <h3 class="text-[#a855f7] font-semibold">SMKN 04 Malang</h3>
+        <p class="text-gray-400 text-sm">Rekayasa Perangkat Lunak | 2020 - 2023</p>
+      </div>
     </div>
   </section>
 
-  <!-- === CONTACT === -->
-  <section class="cv-section fade-section" id="contact">
-    <h2>Contact</h2>
-    <p>Jika tertarik bekerja sama atau berdiskusi, silakan hubungi saya atau unduh CV di bawah ini.</p>
-    <a href="https://www.canva.com/design/DAGITRGqOIM/GnS8qSGSbBR55SRpNtfIxQ/view" target="_blank" class="cv-btn">
-      <i class='bx bx-download'></i> Lihat CV
+  <!-- CONTACT -->
+  <section id="contact" class="py-24 text-center px-6 fade-section">
+    <h2 class="text-3xl font-semibold text-gradient mb-4">Contact</h2>
+    <p class="text-gray-300 mb-6 max-w-2xl mx-auto">Tertarik berkolaborasi? Hubungi saya atau unduh CV di bawah ini.</p>
+    <a href="https://drive.google.com/file/d/1na5vFmSsqpWagWyJkmqTZkow1mBLpD_C/view?usp=sharing" target="_blank"
+      class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#58a6ff] to-[#a855f7] text-white rounded-lg font-medium hover:scale-105 shadow-lg transition-all">
+      <i class='bx bx-download text-xl'></i> Lihat CV
     </a>
   </section>
 
-  <!-- === FOOTER === -->
-  <footer>
-    <h3>Let's Connect</h3>
-    <div class="footer-contacts">
-      <a href="mailto:sagabdespair01@email.com" title="Email"><i class="bx bx-envelope"></i></a>
-      <a href="https://www.linkedin.com/in/fachryakbarbagaskara" target="_blank" title="LinkedIn"><i
-          class="bx bxl-linkedin-square"></i></a>
-      <a href="https://github.com/bagaskara04" target="_blank" title="GitHub"><i class="bx bxl-github"></i></a>
+  <!-- FOOTER -->
+  <footer class="bg-[#0d1117]/90 border-t border-[#232946] py-20 fade-section">
+    <div class="max-w-5xl mx-auto text-center space-y-6">
+      <h3 class="text-2xl font-semibold text-gradient">Let's Connect</h3>
+
+      <div class="flex justify-center gap-10 text-4xl">
+        <a href="mailto:sagabdespair01@email.com"
+          class="text-gray-400 hover:text-[#58a6ff] transition transform hover:scale-110"><i
+            class="bx bx-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/fachryakbarbagaskara" target="_blank"
+          class="text-gray-400 hover:text-[#a855f7] transition transform hover:scale-110"><i
+            class="bx bxl-linkedin-square"></i></a>
+        <a href="https://github.com/bagaskara04" target="_blank"
+          class="text-gray-400 hover:text-[#f472b6] transition transform hover:scale-110"><i
+            class="bx bxl-github"></i></a>
+      </div>
+
+      <div class="mt-6">
+        <p class="text-gray-500 text-sm tracking-wide">
+          &copy; 2025 <span class="text-[#58a6ff] font-medium">Fachry Akbar Bagaskara</span>
+        </p>
+      </div>
     </div>
-    <p>&copy; 2025 Fachry Akbar Bagaskara. All rights reserved.</p>
   </footer>
 
-  <script src="script.js"></script>
+
+  <script>
+    // Fade animation
+    document.addEventListener("DOMContentLoaded", () => {
+      const fadeSections = document.querySelectorAll(".fade-section");
+      const reveal = () => {
+        const trigger = window.innerHeight * 0.85;
+        fadeSections.forEach(sec => {
+          const top = sec.getBoundingClientRect().top;
+          if (top < trigger) sec.classList.add("fade-in");
+        });
+      };
+      window.addEventListener("scroll", reveal);
+      reveal();
+    });
+
+    // Highlight nav + glow on scroll
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll(".nav-link");
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 80;
+        if (scrollY >= sectionTop) current = section.getAttribute("id");
+      });
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) link.classList.add("active");
+      });
+      document.getElementById("navbar").classList.toggle("scrolled", scrollY > 50);
+    });
+
+    // THREE.js Background
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById("bg-canvas"), alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    const geometry = new THREE.BufferGeometry();
+    const vertices = [];
+    for (let i = 0; i < 3000; i++) {
+      vertices.push((Math.random() - 0.5) * 800, (Math.random() - 0.5) * 800, (Math.random() - 0.5) * 800);
+    }
+    geometry.setAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
+    const material = new THREE.PointsMaterial({ color: 0x58a6ff, size: 1.5 });
+    const stars = new THREE.Points(geometry, material);
+    scene.add(stars);
+    camera.position.z = 300;
+
+    function animate() {
+      requestAnimationFrame(animate);
+      stars.rotation.x += 0.0005;
+      stars.rotation.y += 0.001;
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener("resize", () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
 </body>
 
 </html>
