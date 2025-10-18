@@ -114,6 +114,22 @@
       transform: scale(1.05);
       box-shadow: 0 0 30px rgba(88, 166, 255, 0.6), 0 0 60px rgba(168, 85, 247, 0.5);
     }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .animate-fadeIn {
+      animation: fadeIn 0.3s ease-out;
+    }
   </style>
 </head>
 
@@ -128,9 +144,9 @@
       <div class="flex flex-wrap justify-center gap-6 text-sm font-medium">
         <a href="#about" class="nav-link">About</a>
         <a href="#techstack" class="nav-link">Tech Stack</a>
+        <a href="#education" class="nav-link">Education</a>
         <a href="#projects" class="nav-link">Projects</a>
         <a href="#experience" class="nav-link">Experience</a>
-        <a href="#education" class="nav-link">Education</a>
         <a href="#contact" class="nav-link">Contact</a>
       </div>
     </div>
@@ -139,14 +155,15 @@
   <!-- HEADER -->
   <header class="h-screen flex flex-col justify-center items-center text-center fade-section">
     <h1 class="text-5xl sm:text-6xl font-extrabold mb-4 text-gradient">Fachry Akbar Bagaskara</h1>
-    <p class="text-lg text-gray-400 mb-6">Undergraduate Business Information System at Politeknik Negeri Malang | Software Development | SEO Learner | Tech Enthusiast</p>
+    <p class="text-lg text-gray-400 mb-6">Undergraduate Business Information System at Politeknik Negeri Malang |
+      Software Development | SEO Learner | Tech Enthusiast</p>
     <a href="#about"
       class="mt-3 px-6 py-3 bg-gradient-to-r from-[#58a6ff] to-[#a855f7] text-white rounded-lg font-medium shadow-md hover:scale-105 transition">Explore
       More ↓</a>
   </header>
 
   <!-- ABOUT -->
-  <section id="about" class="py-24 px-6 md:px-24 fade-section">
+  <section id="about" class="py-24 px-6 md:px-24 fade-section bg-[#0d1117]/70">
     <h2 class="text-3xl font-semibold text-gradient mb-6">About Me</h2>
     <p class="max-w-3xl text-gray-300">Halo! Saya pengembang web yang fokus pada desain modern, performa cepat, dan
       pengalaman pengguna menyenangkan. Saya menyukai kombinasi antara <span
@@ -185,35 +202,71 @@
     </div>
   </section>
 
+  <!-- EDUCATION -->
+  <section id="education" class="py-24 px-6 md:px-24 fade-section bg-[#0d1117]/70">
+    <h2 class="text-3xl font-semibold text-gradient mb-8">Education</h2>
+    <div class="space-y-3">
+      <div>
+        <h3 class="text-[#58a6ff] font-semibold">Politeknik Negeri Malang</h3>
+        <p class="text-gray-400 text-sm">Diploma IV - Sistem Informasi Bisnis | 2023 - Sekarang</p>
+      </div>
+      <div>
+        <h3 class="text-[#a855f7] font-semibold">SMKN 04 Malang</h3>
+        <p class="text-gray-400 text-sm">Rekayasa Perangkat Lunak | 2020 - 2023</p>
+      </div>
+    </div>
+  </section>
+
   <!-- PROJECTS -->
-  <section id="projects" class="py-24 px-6 md:px-24 fade-section bg-[#0d1117]/60">
+  <section id="projects" class="py-24 px-6 md:px-24 fade-section">
     <h2 class="text-3xl font-semibold text-gradient mb-8">Projects</h2>
     <div class="grid md:grid-cols-3 gap-8">
-      <a href="https://github.com/bagaskara04/Kasir-Restoran" target="_blank"
-        class="glow bg-[#161b22]/90 p-8 rounded-2xl text-center hover:-translate-y-2 transition">
+      <a href="#" class="project-card glow bg-[#161b22]/90 p-8 rounded-2xl text-center hover:-translate-y-2 transition"
+        data-title="Kasir Restoran"
+        data-desc="Aplikasi kasir berbasis Java Netbeans(GUI) dengan fitur transaksi, laporan, dan manajemen menu."
+        data-role="Fullstack Developer" data-tags="Java, Netbeans, MySQL"
+        data-link="https://github.com/bagaskara04/Kasir-Restoran">
         <i class="bx bx-store-alt text-5xl text-[#58a6ff] mb-3"></i>
         <h3 class="text-xl font-bold mb-2">Kasir Restoran</h3>
-        <p class="text-gray-400 text-sm">Aplikasi kasir berbasis Java Netbeans(GUI) dengan fitur transaksi, laporan, dan
-          manajemen
-          menu.</p>
       </a>
-      <a href="https://github.com/bagaskara04/TataTertib" target="_blank"
-        class="glow bg-[#161b22]/90 p-8 rounded-2xl text-center hover:-translate-y-2 transition">
+
+      <a href="#" class="project-card glow bg-[#161b22]/90 p-8 rounded-2xl text-center hover:-translate-y-2 transition"
+        data-title="SITATIB"
+        data-desc="Website pencatatan pelanggaran mahasiswa Polinema berbasis PHP Native dan AdminLTE."
+        data-role="Project Manager & Backend Developer" data-tags="PHP, HTML, CSS, AdminLTE, Javascript, MySQL"
+        data-link="https://github.com/bagaskara04/TataTertib">
         <i class="bx bx-task text-5xl text-[#a855f7] mb-3"></i>
         <h3 class="text-xl font-bold mb-2">SITATIB</h3>
-        <p class="text-gray-400 text-sm">Website pencatatan pelanggaran mahasiswa Polinema berbasis dengan PHP Native dan AdminLTE.</p>
       </a>
-      <a href="https://github.com/jessicaamelia17/PBL-TOEIC" target="_blank"
-        class="glow bg-[#161b22]/90 p-8 rounded-2xl text-center hover:-translate-y-2 transition">
+
+      <a href="#" class="project-card glow bg-[#161b22]/90 p-8 rounded-2xl text-center hover:-translate-y-2 transition"
+        data-title="PTC (Polinema TOEIC Center)"
+        data-desc="Sistem pendaftaran & pengelolaan ujian TOEIC berbasis Laravel." data-role="Backend Developer & Database Administrator"
+        data-tags="Laravel, PHP, MySQL, Tailwind, Blade" data-link="https://github.com/jessicaamelia17/PBL-TOEIC">
         <i class="bx bxs-graduation text-5xl text-[#ec4899] mb-3"></i>
         <h3 class="text-xl font-bold mb-2">PTC (Polinema TOEIC Center)</h3>
-        <p class="text-gray-400 text-sm">Sistem pendaftaran & pengelolaan ujian TOEIC berbasis Laravel.</p>
       </a>
     </div>
   </section>
 
+  <!-- PROJECT DETAIL MODAL -->
+  <div id="project-modal"
+    class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-[999]">
+    <div class="bg-[#161b22] p-8 rounded-2xl w-11/12 md:w-2/3 lg:w-1/2 shadow-xl relative text-center animate-fadeIn">
+      <button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
+      <h3 id="modal-title" class="text-2xl font-bold text-gradient mb-4"></h3>
+      <p id="modal-desc" class="text-gray-300 mb-4"></p>
+      <p id="modal-role" class="text-sm text-gray-400 italic mb-4"></p>
+      <div id="modal-tags" class="flex flex-wrap justify-center gap-2 mb-6"></div>
+      <a id="modal-link" href="#" target="_blank"
+        class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#58a6ff] to-[#a855f7] text-white rounded-lg font-medium hover:scale-105 shadow-lg transition-all">
+        <i class='bx bx-link-external text-xl'></i> Lihat Project
+      </a>
+    </div>
+  </div>
+
   <!-- EXPERIENCE -->
-  <section id="experience" class="py-24 px-6 md:px-24 fade-section">
+  <section id="experience" class="py-24 px-6 md:px-24 fade-section bg-[#0d1117]/60">
     <h2 class="text-3xl font-semibold text-gradient mb-8">Experience</h2>
     <div class="border-l-2 border-[#58a6ff] pl-6 space-y-8">
       <div>
@@ -233,21 +286,6 @@
     </div>
   </section>
 
-  <!-- EDUCATION -->
-  <section id="education" class="py-24 px-6 md:px-24 fade-section bg-[#0d1117]/70">
-    <h2 class="text-3xl font-semibold text-gradient mb-8">Education</h2>
-    <div class="space-y-3">
-      <div>
-        <h3 class="text-[#58a6ff] font-semibold">Politeknik Negeri Malang</h3>
-        <p class="text-gray-400 text-sm">Diploma IV - Sistem Informasi Bisnis | 2023 - Sekarang</p>
-      </div>
-      <div>
-        <h3 class="text-[#a855f7] font-semibold">SMKN 04 Malang</h3>
-        <p class="text-gray-400 text-sm">Rekayasa Perangkat Lunak | 2020 - 2023</p>
-      </div>
-    </div>
-  </section>
-
   <!-- CONTACT -->
   <section id="contact" class="py-24 text-center px-6 fade-section">
     <h2 class="text-3xl font-semibold text-gradient mb-4">Contact</h2>
@@ -262,7 +300,6 @@
   <footer class="bg-[#0d1117]/90 border-t border-[#232946] py-20 fade-section">
     <div class="max-w-5xl mx-auto text-center space-y-6">
       <h3 class="text-2xl font-semibold text-gradient">Let's Connect</h3>
-
       <div class="flex justify-center gap-10 text-4xl">
         <a href="mailto:sagabdespair01@email.com"
           class="text-gray-400 hover:text-[#58a6ff] transition transform hover:scale-110"><i
@@ -274,15 +311,10 @@
           class="text-gray-400 hover:text-[#f472b6] transition transform hover:scale-110"><i
             class="bx bxl-github"></i></a>
       </div>
-
-      <div class="mt-6">
-        <p class="text-gray-500 text-sm tracking-wide">
-          &copy; 2025 <span class="text-[#58a6ff] font-medium">Fachry Akbar Bagaskara</span>
-        </p>
-      </div>
+      <p class="text-gray-500 text-sm tracking-wide mt-6">&copy; 2025 <span class="text-[#58a6ff] font-medium">Fachry
+          Akbar Bagaskara</span></p>
     </div>
   </footer>
-
 
   <script>
     // Fade animation
@@ -305,37 +337,34 @@
     window.addEventListener("scroll", () => {
       let current = "";
       sections.forEach(section => {
-        const sectionTop = section.offsetTop - 80;
-        if (scrollY >= sectionTop) current = section.getAttribute("id");
+        const sectionTop = section.offsetTop - 120;
+        if (pageYOffset >= sectionTop) current = section.getAttribute("id");
       });
       navLinks.forEach(link => {
         link.classList.remove("active");
         if (link.getAttribute("href") === "#" + current) link.classList.add("active");
       });
-      document.getElementById("navbar").classList.toggle("scrolled", scrollY > 50);
+      document.getElementById("navbar").classList.toggle("scrolled", window.scrollY > 50);
     });
 
-    // THREE.js Background
+    // Three.js Background
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById("bg-canvas"), alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     const geometry = new THREE.BufferGeometry();
-    const vertices = [];
-    for (let i = 0; i < 3000; i++) {
-      vertices.push((Math.random() - 0.5) * 800, (Math.random() - 0.5) * 800, (Math.random() - 0.5) * 800);
-    }
-    geometry.setAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
-    const material = new THREE.PointsMaterial({ color: 0x58a6ff, size: 1.5 });
-    const stars = new THREE.Points(geometry, material);
-    scene.add(stars);
-    camera.position.z = 300;
+    const vertices = new Float32Array(1000 * 3).map(() => (Math.random() - 0.5) * 10);
+    geometry.setAttribute("position", new THREE.BufferAttribute(vertices, 3));
+    const material = new THREE.PointsMaterial({ color: 0x58a6ff, size: 0.02 });
+    const points = new THREE.Points(geometry, material);
+    scene.add(points);
+    camera.position.z = 2;
 
     function animate() {
       requestAnimationFrame(animate);
-      stars.rotation.x += 0.0005;
-      stars.rotation.y += 0.001;
+      points.rotation.x += 0.001;
+      points.rotation.y += 0.001;
       renderer.render(scene, camera);
     }
     animate();
@@ -344,6 +373,42 @@
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // Modal Project Detail (update)
+    const modal = document.getElementById("project-modal");
+    const modalTitle = document.getElementById("modal-title");
+    const modalDesc = document.getElementById("modal-desc");
+    const modalRole = document.getElementById("modal-role");
+    const modalTags = document.getElementById("modal-tags");
+    const modalLink = document.getElementById("modal-link");
+    const closeModal = document.getElementById("close-modal");
+
+    document.querySelectorAll(".project-card").forEach(card => {
+      card.addEventListener("click", e => {
+        e.preventDefault();
+        modalTitle.textContent = card.dataset.title;
+        modalDesc.textContent = card.dataset.desc;
+        modalRole.textContent = `Role: ${card.dataset.role}`;
+        modalLink.href = card.dataset.link;
+
+        // Generate tags
+        modalTags.innerHTML = "";
+        card.dataset.tags.split(",").forEach(tag => {
+          const tagEl = document.createElement("span");
+          tagEl.textContent = tag.trim();
+          tagEl.className =
+            "px-3 py-1 bg-[#232946] text-[#58a6ff] text-xs rounded-full border border-[#58a6ff]/30";
+          modalTags.appendChild(tagEl);
+        });
+
+        modal.classList.remove("hidden");
+      });
+    });
+
+    closeModal.addEventListener("click", () => modal.classList.add("hidden"));
+    modal.addEventListener("click", e => {
+      if (e.target === modal) modal.classList.add("hidden");
     });
   </script>
 </body>
